@@ -60,5 +60,74 @@ def getDownCellsFromMid(template, downMid):
 def numCells(template):
   return ''.join(template).count('*')
 
+def getStartLocations(template):
+  startCells = []
+  startCellsNotation = []
+  cell = 1
+  c = False
+  for i in range(len(template)):
+    for j in range(len(template[0])):
+      if template[i][j] == ' ': continue
+      if c:
+        cell += 1
+      c = False
+      if i == 0 or j == 0:
+        startCells.append((i,j))
+        if i == 0:
+          startCellsNotation.append(str(cell)+'D')
+          c = True
+        if j == 0:
+          startCellsNotation.append(str(cell)+'A')
+          c = True
+        continue
+      if template[i-1][j] == ' ' or template[i][j-1] == ' ':
+        startCells.append((i,j))
+        if template[i-1][j] == ' ':
+          startCellsNotation.append(str(cell)+'D')
+          c = True
+        if template[i][j-1] == ' ':
+          startCellsNotation.append(str(cell)+'A')
+          c = True
+  return startCellsNotation
+
 if __name__ == '__main__':
-  print getAcrossStart(template, (4,5))
+  print getStartLocations(template)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

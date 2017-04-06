@@ -1,6 +1,11 @@
-f = open('/usr/share/dict/american-english', 'r')
-words = f.read().split('\n')
-f.close()
+try:
+  f = open('/usr/share/dict/american-english', 'r')
+  words = f.read().split('\n')
+  f.close()
+except IOError:
+  import urllib2
+  page = urllib2.urlopen('https://raw.githubusercontent.com/dwyl/english-words/master/words.txt')
+  words = page.read().split('\n')
 
 index = []
 # build word index
